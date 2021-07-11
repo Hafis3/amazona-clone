@@ -1,0 +1,23 @@
+.header{
+    display: flex;
+    height:60px;
+    background-color: #203040;
+    color:white;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header >h3{
+    color:white;
+    padding:5px;
+
+}
+
+.header__routes > a{
+    text-decoration: none;
+    color:white;
+    margin-right: 1rem;
+}
+.header__routes > a:hover{
+    color:#ffb20d
+}

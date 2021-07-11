@@ -1,0 +1,6 @@
+.rating span >i {
+  color: #f0c040
+}
+.rating span:last-child {
+  padding:4px;
+}

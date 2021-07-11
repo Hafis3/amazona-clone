@@ -1,0 +1,26 @@
+.product {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+.product__container {
+  background-color: #f3f3f3;
+  border-radius: 3px;
+  margin: 10px;
+  padding: 3px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px 2px lightgrey;
+}
+.product__image > img {
+  width: 250px;
+  height: 300px;
+}
+.product__info{
+     padding:10px;
+  margin-bottom: 15px;
+}
+.product__info * {
+  color: gray;
+}
