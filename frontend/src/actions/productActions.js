@@ -26,8 +26,7 @@ export const detailsProduct = (productId) => async (dispatch) => {
     type: productAction.PRODUCT_DETAILS_REQUEST,    
   });
   Axios.get(`/api/product/${productId}`)
-    .then(({data}) => {
-      console.log(data);
+    .then(({data}) => {      
       dispatch({
         type: productAction.PRODUCT_DETAILS_SUCCESS,
         payload: data,

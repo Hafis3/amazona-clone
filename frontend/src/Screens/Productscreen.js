@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Rating from "../components/Rating";
@@ -6,16 +6,23 @@ import { detailsProduct } from "../actions/productActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import "./Productscreen.css";
+import { addToCart } from "../actions/cartAction";
 
 function Productscreen(props) {
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
   const productId = props.match.params.id;
   const { loading, error, product } = productDetails;
+  const [qty, setQty] = useState(1);
 
   useEffect(() => {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId]);
+
+  const handleOnClick = () => {
+    dispatch(addToCart(productId,qty))
+    props.history.push(`/Cart/${productId}?qty=${qty}`);
+  };
 
   return (
     <div className="productscreen">
@@ -23,7 +30,7 @@ function Productscreen(props) {
         <LoadingBox />
       ) : error ? (
         <MessageBox variants="danger" message={error} />
-      ) : (    
+      ) : (
         <div>
           <Link to="/">Back to result</Link>
           <div className="productscreen__container">
@@ -80,25 +87,42 @@ function Productscreen(props) {
                       </div>
                     </div>
                   </li>
-                  <li>
-                    <div className="row">
-                      <div>Qty</div>
-                      <select name="qty" id="">
-                        <p>1</p>
-                        <p>2</p>
-                        <p>3</p>
-                        <p>4</p>
-                      </select>
-                    </div>
-                  </li>
-                  <li>
-                    <button className="primary">Add to Cart</button>
-                  </li>
+                  {product.countInStock && (
+                    <>
+                      <li>
+                        <div className="row">
+                          <div>Qty</div>
+                          <select
+                            value={qty}
+                            onChange={(e) => setQty(e.target.value)}
+                            name="qty"
+                            id=""
+                          >
+                            {[...Array(product.countInStock).keys()].map(
+                              (iqty) => {
+                                let qValue = iqty + 1;
+                                return (
+                                  <option key={qValue} value={qValue}>
+                                    {qValue}
+                                  </option>
+                                );
+                              }
+                            )}
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <button onClick={handleOnClick} className="primary">
+                          Add to Cart
+                        </button>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>
-          </div>  
-        </div>    
+          </div>
+        </div>
       )}
     </div>
   );

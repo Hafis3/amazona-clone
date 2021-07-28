@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./Product.css";
 import Rating from "../components/Rating";
@@ -23,9 +24,9 @@ function Product() {
         products.map((product) => (
           <div key={product._id} className="product__container">
             <div className="product__image">
-              <a href={`product/${product._id}`}>
+              <Link to={`/product/${product._id}`}>
                 <img src={product.image} alt="" />
-              </a>
+              </Link>
             </div>
             <div className="product__info">
               <h4>{product.name}</h4>
