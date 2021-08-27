@@ -11,7 +11,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       if (indexItemExist !== -1) {
         state.cartItems.splice(indexItemExist, 1, cart);
         console.log(state.cartItems);
-        return {          
+        return {
           ...state,
         };
       } else {
@@ -20,7 +20,13 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
           cartItems: [...state.cartItems, cart],
         };
       }
-
+    case cartActions.CART_REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((item) => {
+          return item.product !== action.payload;
+        }),
+      };
     default:
       return state;
   }

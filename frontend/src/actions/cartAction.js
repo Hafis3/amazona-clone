@@ -12,9 +12,20 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
         price: data.price,
         brand: data.brand,
         product: data._id,
+        countInStock: data.countInStock,
         qty,
       },
     });
   });
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+};
+
+export const removeItemFromCart = (productId) => async (dispatch,getState) => {
+  dispatch({
+    type: cartAction.CART_REMOVE_ITEM,
+    payload: {
+      productId,
+    },
+  });
+  localStorage.setItem('cartItems',JSON.stringify(getState().cart.cartItems));
 };

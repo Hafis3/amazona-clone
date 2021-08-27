@@ -20,7 +20,7 @@ function Productscreen(props) {
   }, [dispatch, productId]);
 
   const handleOnClick = () => {
-    dispatch(addToCart(productId,qty))
+    dispatch(addToCart(productId, qty));
     props.history.push(`/Cart/${productId}?qty=${qty}`);
   };
 
@@ -93,7 +93,7 @@ function Productscreen(props) {
                         <div className="row">
                           <div>Qty</div>
                           <select
-                            value={qty}
+                            value={product.qty}
                             onChange={(e) => setQty(e.target.value)}
                             name="qty"
                             id=""
